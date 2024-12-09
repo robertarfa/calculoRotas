@@ -1,1 +1,26 @@
 GET http://localhost:3000/places?text=rua descampado, sao paulo,121
+
+###
+GET http://localhost:3000/places?text=av aricanduva, sao paulo, 5000
+
+@originId = ChIJrZ6qDWdnzpQRfZR7hqCexTs
+@destinationId = ChIJuzoaC3BbzpQRy8308xQugUo
+
+###
+GET http://localhost:3000/directions?originId={{ originId }}&destinationId={{ destinationId }}
+
+###
+POST http://localhost:3000/routes
+Content-Type: application/json
+
+{
+    "name": "rota 1",
+    "source_id": "{{ originId }}",
+    "destination_id": "{{ destinationId }}"
+}
+
+###
+GET http://localhost:3000/routes
+
+###
+GET http://localhost:3000/routes/6757420fa8be785634f0703a
