@@ -1,8 +1,8 @@
-# Imersão Fullcycle 20 - Sistema de rastreamento de veículos
+# Sistema de rastreamento de veículos
 
 ## Descrição
 
-Repositório do Django (front-end da aplicação).
+Repositório do Next.js (front-end da aplicação).
 
 ## Requerimentos
 
@@ -18,7 +18,7 @@ Repositório do Django (front-end da aplicação).
 Gere o arquivo `.env` através do comando:
 
 ```
-cp .env.example .env
+cp .env
 ```
 
 Instale as dependências:
@@ -32,6 +32,3 @@ Rode o servidor:
 ```bash
 npm run dev
 ```
-
-
-
