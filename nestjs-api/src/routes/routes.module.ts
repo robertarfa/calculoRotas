@@ -4,10 +4,11 @@ import { RoutesController } from './routes.controller';
 import { MapsModule } from '../maps/maps.module';
 // import { RoutesDriverService } from './routes-driver/routes-driver.service';
 import { RoutesDriverService } from './routes-driver/routes-driver.service';
+import { RoutesDriverGateway } from './routes-driver/routes-driver.gateway';
 
 @Module({
   imports: [MapsModule],
   controllers: [RoutesController],
-  providers: [RoutesService, RoutesDriverService],
+  providers: [RoutesService, RoutesDriverService, RoutesDriverGateway],
 })
 export class RoutesModule {}
