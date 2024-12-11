@@ -11,24 +11,58 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoutesDriverGateway = void 0;
 const websockets_1 = require("@nestjs/websockets");
+const routes_service_1 = require("../routes.service");
 let RoutesDriverGateway = class RoutesDriverGateway {
-    handleMessage(client, payload) {
-        console.log(payload);
-        return 'Hello world!';
+    constructor(routesService) {
+        this.routesService = routesService;
+    }
+    async handleMessage(client, payload) {
+        const { route_id } = payload;
+        console.log('route_id', route_id);
+        const route = await this.routesService.findOne(route_id);
+        const { steps } = route.directions.routes[0].legs[0];
+        for (const step of steps) {
+            const { lat, lng } = step.start_location;
+            client.emit(`server:new-points/${route_id}:list`, {
+                route_id,
+                lat,
+                lng,
+            });
+            client.broadcast.emit('server:new-points:list', {
+                route_id,
+                lat,
+                lng,
+            });
+            await sleep(2000);
+            const { lat: lat2, lng: lng2 } = step.end_location;
+            client.emit(`server:new-points/${route_id}:list`, {
+                route_id,
+                lat: lat2,
+                lng: lng2,
+            });
+            client.broadcast.emit('server:new-points:list', {
+                route_id,
+                lat,
+                lng,
+            });
+            await sleep(2000);
+        }
     }
 };
 exports.RoutesDriverGateway = RoutesDriverGateway;
 __decorate([
-    (0, websockets_1.SubscribeMessage)('message'),
+    (0, websockets_1.SubscribeMessage)('client:new-points'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", String)
+    __metadata("design:returntype", Promise)
 ], RoutesDriverGateway.prototype, "handleMessage", null);
 exports.RoutesDriverGateway = RoutesDriverGateway = __decorate([
     (0, websockets_1.WebSocketGateway)({
         cors: {
             origin: '*',
         },
-    })
+    }),
+    __metadata("design:paramtypes", [routes_service_1.RoutesService])
 ], RoutesDriverGateway);
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 //# sourceMappingURL=routes-driver.gateway.js.map

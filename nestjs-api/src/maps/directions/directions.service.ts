@@ -12,7 +12,6 @@ export class DirectionsService {
     private googleMapsClient: GoogleMapsClient,
     private configService: ConfigService,
   ) {}
-
   async getDirections(originId: string, destinationId: string) {
     const requestParams: DirectionsRequest['params'] = {
       origin: `place_id:${originId}`,

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { useMap } from '../../hooks/useMap';
-import { socket } from '../../utils/socket-io';
+import { useEffect, useRef } from "react";
+import { useMap } from "../../hooks/useMap";
+import { socket } from "../../utils/socket-io";
 
 export type MapDriverProps = {
   route_id: string | null;
@@ -29,8 +29,8 @@ export function MapDriver(props: MapDriverProps) {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     socket.disconnected ? socket.connect() : socket.offAny();
 
-    socket.on('connect', () => {
-      console.log('connected');
+    socket.on("connect", () => {
+      console.log("connected");
       socket.emit(`client:new-points`, { route_id });
     });
 
@@ -59,5 +59,5 @@ export function MapDriver(props: MapDriverProps) {
     };
   }, [route_id, start_location, end_location, map]);
 
-  return <div className='w-2/3 h-full' ref={mapContainerRef} />;
+  return <div className="w-2/3 h-full" ref={mapContainerRef} />;
 }

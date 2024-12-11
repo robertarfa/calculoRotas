@@ -1,3 +1,6 @@
+import { RoutesService } from '../routes.service';
 export declare class RoutesDriverGateway {
-    handleMessage(client: any, payload: any): string;
+    private routesService;
+    constructor(routesService: RoutesService);
+    handleMessage(client: any, payload: any): Promise<void>;
 }
