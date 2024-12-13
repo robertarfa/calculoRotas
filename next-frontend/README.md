@@ -1,8 +1,8 @@
-# Sistema de rastreamento de veículos
+# Imersão Fullcycle 20 - Sistema de rastreamento de veículos
 
 ## Descrição
 
-Repositório do Next.js (front-end da aplicação).
+Repositório do Golang (front-end da aplicação).
 
 ## Requerimentos
 
@@ -15,10 +15,22 @@ Repositório do Next.js (front-end da aplicação).
 
 ## Rodar a aplicação
 
+Levante o container:
+
+```
+docker compose up -d
+```
+
+Acesse o container do Next.js:
+
+```
+docker compose exec next bash
+```
+
 Gere o arquivo `.env` através do comando:
 
 ```
-cp .env
+cp .env.example .env
 ```
 
 Instale as dependências:
@@ -32,3 +44,6 @@ Rode o servidor:
 ```bash
 npm run dev
 ```
+
+
+
